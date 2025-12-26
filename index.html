@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Po Gendut ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.card{
+  background:rgba(255,255,255,.92);
+  border-radius:26px;
+  padding:35px 25px;
+  text-align:center;
+  max-width:380px;
+  width:90%;
+  box-shadow:0 25px 45px rgba(0,0,0,.2);
+  position:relative;
+}
+h1{
+  font-family:'Sacramento',cursive;
+  font-size:36px;
+}
+h2{margin-bottom:10px}
+p{
+  font-size:14px;
+  line-height:1.7;
+  color:#444;
+}
+.emoji{
+  font-size:70px;
+  cursor:pointer;
+  transition:.3s;
+}
+.emoji:hover{transform:scale(1.15)}
+.hidden{display:none}
+
+/* lilin animasi */
+.flame{
+  animation:flicker .15s infinite alternate;
+  display:inline-block;
+}
+@keyframes flicker{
+  from{transform:rotate(-2deg) scale(1)}
+  to{transform:rotate(2deg) scale(1.1)}
+}
+
+/* confetti */
+.confetti{
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/08/26/audio_0c9c6c8db4.mp3">
+</audio>
+
+<div class="card">
+
+  <!-- STEP 1 -->
+  <div id="step1">
+    <h2>Ada sesuatu buat kamu</h2>
+    <div class="emoji" onclick="nextStep(2)">🎁</div>
+    <p>Klik kadonya</p>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="hidden">
+    <h2>Buka pelan-pelan</h2>
+    <div class="emoji" onclick="nextStep(3)">🎁✨</div>
+    <p>Klik sekali lagi</p>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="hidden">
+    <h2>Ada kue nih</h2>
+    <div class="emoji" onclick="nextStep(4)">🎂</div>
+    <p>Klik kuenya</p>
+  </div>
+
+  <!-- STEP 4 -->
+  <div id="step4" class="hidden">
+    <h2>Tiup lilinnya dulu</h2>
+    <div class="emoji" onclick="nextStep(5)">
+      <span class="flame">🕯️</span>
+      <span class="flame">🕯️</span>
+      <span class="flame">🕯️</span>
+    </div>
+    <p>Bikin doa ya</p>
+  </div>
+
+  <!-- STEP 5 -->
+  <div id="step5" class="hidden">
+    <h1>Happy Birthday 🎉</h1>
+    <h2>Po Gendut ❤️</h2>
+    <p id="typing"></p>
+  </div>
+
+</div>
+
+<script>
+const music=document.getElementById("music");
+const text=`Selamat ulang tahun po gendut sayangku.
+
+Selamat bertambah umur, dimudahkan dan dilancarkan semua urusan,
+serta ditambahkan rezekinya yaa.
+
+Jangan suka marah-marah sama aku biar nda cepat tua 😋
+Tambah sayang, romantis, dan peka ya gendoyyy.
+
+Sama aku terus ya po gendoy.
+Maaf kalau nda effort kasih atau belikanko hadiah,
+soalnya aku pengangguran 😅
+
+Love you gendut sayangkuuuu ❤️
+Semoga rezekimu sederas air terjun.
+Sehat selalu po gendut nan alay.
+Jangan lupa diet 😆`;
+
+let index=0;
+function typeText(){
+  if(index<text.length){
+    document.getElementById("typing").innerHTML+=
+      text[index]==="\n"?"<br>":text[index];
+    index++;
+    setTimeout(typeText,35);
+  }
+}
+
+function confetti(){
+  const emojis=["🎉","💖","✨","❤️","🎊"];
+  for(let i=0;i<40;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=2+Math.random()*3+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+function nextStep(n){
+  music.play();
+  for(let i=1;i<=5;i++){
+    document.getElementById("step"+i).classList.add("hidden");
+  }
+  document.getElementById("step"+n).classList.remove("hidden");
+
+  if(n===5){
+    confetti();
+    typeText();
+  }
+}
+</script>
+
+</body>
+</html>
